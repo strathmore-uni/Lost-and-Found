@@ -50,35 +50,47 @@
                 errorElement.style.display = 'block';
                 return;
             }
-            
-            try {
-                const response = await fetch('http://localhost:8000/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username: username,
-                        password: password
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    // Successful login - redirect or store token
-                    localStorage.setItem('authToken', data.token);
-                    window.location.href = 'dashboard.html'; // Redirect to dashboard
-                } else {
-                    // Show error message
-                    errorElement.textContent = data.message || 'Login failed';
-                    errorElement.style.display = 'block';
-                }
-            } catch (error) {
-                errorElement.textContent = 'Network error. Please try again.';
+            // Validate password length
+            if (password.length < 8) {
+                errorElement.textContent = 'Password must be at least 8 characters long';
                 errorElement.style.display = 'block';
-                console.error('Login error:', error);
+                return;
             }
+            // Simulate a login request
+            try {
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData)
+    });
+    
+    const data = await response.json();
+    
+    if (response.ok) {
+        // Successful login
+        localStorage.setItem('authToken', data.token);
+        console.log('Login successful, redirecting...');
+        window.location.href = 'dashboard.html'; // Try full path if needed
+    } else {
+        // Show error message
+        errorElement.textContent = data.message || 'Login failed';
+        errorElement.style.display = 'block';
+    }
+} catch (error) {
+    errorElement.textContent = 'Network error. Please try again.';
+    errorElement.style.display = 'block';
+    console.error('Login error:', error);
+}
+
+            
+            // Simulate a successful login
+            // In a real application, you would send the credentials to the server here
+            console.log('Login successful for:', username);
+            
+            // Redirect to the dashboard or another page
+            window.location.href = 'dashboard.html'; // Change to your actual dashboard URL
         });
     </script>
 </body>
