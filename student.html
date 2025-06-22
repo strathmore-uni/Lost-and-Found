@@ -10,7 +10,7 @@
 </head>
 <body>
    <div class="login-container">
-        <h1>Sign in using your AMS credentials</h1>
+        <h1>Log in using your AMS credentials</h1>
         <form id="loginForm">
             <div id="errorMessage" class="error" style="display: none;"></div>
             
@@ -29,9 +29,12 @@
                 <label for="remember">Remember me</label>
             </div>
             
-            <button type="submit">Sign in</button>
+            <button type="submit">login</button>
+            
+            <a href="register.html" class="register">Register</a>
         </form>
     </div>
+    
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
