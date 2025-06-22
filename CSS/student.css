@@ -69,4 +69,13 @@ body {
         button:hover {
             background-color: #0069d9;
         }
+        .register {
+            background-color: #e3e5e3;
+            color: white;
+            
+        }
+        
+        .register:hover {
+            background-color: #218838;
+        }
       
