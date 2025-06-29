@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Guard Registration | Strathmore Lost & Found</title>
+    <link rel="stylesheet" href="CSS/Security Guard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Security Guard Registration</h1>
+            <p>Strathmore University Lost & Found System</p>
+        </div>
+        
+        <div class="registration-form">
+            <form id="guardRegistrationForm">
+                                                
+                <div class="form-group">
+                    <label for="email">Email Address*</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                                               
+                <div class="form-group">
+                    <label for="password">Password* (min 8 characters)</label>
+                    <input type="password" id="password" name="password" required minlength="8">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password*</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                    <div id="passwordError" class="error-message"></div>
+                </div>
+                                
+                <button type="submit" class="btn">Register</button>
+            </form>
+            
+            
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('guardRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate passwords match
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const passwordError = document.getElementById('passwordError');
+            
+            if (password !== confirmPassword) {
+                passwordError.textContent = "Passwords do not match";
+                return;
+            } else {
+                passwordError.textContent = "";
+            }
+            
+            // Collect form data
+            const formData = {
+                full_name: document.getElementById('full_name').value,
+                email: document.getElementById('email').value,
+                password: password,
+                user_type: 'security_guard'
+            };
+            
+            // Send to server
+            registerGuard(formData);
+        });
+        
+        function registerGuard(formData) {
+            // In a real application, this would be a fetch call to your backend
+            fetch('register_guard.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirect to login page after successful registration
+                    window.location.href = 'Securityguardlogin.html?registration=success';
+                } else {
+                    alert('Registration failed: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during registration');
+            });
+            
+            // For demonstration, we'll simulate a successful registration
+            console.log('Form data:', formData);
+            alert('Registration successful! Redirecting to login...');
+            window.location.href = 'Securityguardlogin.html?registration=success';
+        }
+    </script>
+</body>
+</html>
