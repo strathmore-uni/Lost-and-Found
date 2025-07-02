@@ -15,6 +15,7 @@ body {
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 h1 {
@@ -26,6 +27,11 @@ h1 {
 
 /* Table Styling */
 table {
+  margin: 0 auto;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
@@ -34,9 +40,13 @@ table {
 }
 
 th, td {
-  padding: 12px 15px;
+  padding: 10px 15px;
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
+  font-size: 0.9em;
+  color: #555;
+  vertical-align: middle;
+
 }
 
 th {
@@ -45,6 +55,9 @@ th {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-size: 0.95em;
+  border-bottom: 2px solid #000000;
+
 }
 
 tr:nth-child(even) {
@@ -107,3 +120,27 @@ tr:hover {
     overflow-x: auto;
   }
 }
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  table {
+    font-size: 0.8em;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+
+  .btn {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+}
+
