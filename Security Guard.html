@@ -33,8 +33,9 @@
                     <input type="password" id="confirm_password" name="confirm_password" required>
                     <div id="passwordError" class="error-message"></div>
                 </div>
-                                
-                <button type="submit" class="btn">Register</button>
+                              
+                   <button type="submit">Register</button>             
+                
             </form>
             
             
@@ -56,10 +57,27 @@
             } else {
                 passwordError.textContent = "";
             }
+
+            // Clear any previous error messages
+            document.getElementById('errorMessage').style.display = 'none';
+
+              // Validate Strathmore email format
+            if (!username.endsWith('@strathmore.edu')) {
+                errorElement.textContent = 'Please use your Strathmore University email address (@strathmore.edu)';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            // Validate password length
+            if (password.length < 8) {
+                errorElement.textContent = 'Password must be at least 8 characters long';
+                errorElement.style.display = 'block';
+                return;
+            }
+
             
             // Collect form data
             const formData = {
-                full_name: document.getElementById('full_name').value,
                 email: document.getElementById('email').value,
                 password: password,
                 user_type: 'security_guard'
@@ -68,34 +86,56 @@
             // Send to server
             registerGuard(formData);
         });
+       
+
+         // Simulate a register request
+            try {
+    const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData)
+    });
+    const data = await response.json();
+    if (response.ok) {
+        // Successful registration
+        console.log('Registration successful:', data);
+        alert('Registration successful! Redirecting to login...');
+        window.location.href = 'Securityguardlogin.html';//redirect to login page
+    } else {
+        // Show error message
+        errorElement.textContent = data.message || 'Registration failed';
+        errorElement.style.display = 'block';
+    }
+} catch (error) {
+    errorElement.textContent = 'Network error. Please try again.';
+    errorElement.style.display = 'block';
+    console.error('Registration error:', error);
+}
+
         
-        function registerGuard(formData) {
-            // In a real application, this would be a fetch call to your backend
-            fetch('register_guard.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Redirect to login page after successful registration
-                    window.location.href = 'Securityguardlogin.html?registration=success';
+        async function registerGuard(formData) {
+            try {
+                const response = await fetch('/api/guards/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('Registration successful! Redirecting to login...');
+                    window.location.href = 'Securityguardlogin.html';
                 } else {
-                    alert('Registration failed: ' + data.message);
+                    const errorData = await response.json();
+                    alert(`Error: ${errorData.message}`);
                 }
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error:', error);
-                alert('An error occurred during registration');
-            });
-            
-            // For demonstration, we'll simulate a successful registration
-            console.log('Form data:', formData);
-            alert('Registration successful! Redirecting to login...');
-            window.location.href = 'Securityguardlogin.html?registration=success';
+                alert('An error occurred while registering. Please try again.');
+            }
         }
     </script>
 </body>
