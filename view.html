@@ -24,28 +24,50 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in items %}
+           
             <tr>
-                <td>{{ item[0] }}</td>
-                <td>{{ item[1] }}</td>
-                <td>{{ item[2] }}</td>
-                <td>{{ item[3] }}</td>
-                <td>{{ item[4] }}</td>
-                <td>{{ item[5] }}</td>
-                <td>{{ item[6] if item[6] else 'N/A' }}</td>
-                <td>{{ item[7] if item[7] else 'N/A' }}</td>
-                <td>
-                    {% if item[5] == 'Unclaimed' %}
-                    <form action="/update_status/{{ item[0] }}" method="POST">
-                        <input type="text" name="claimed_by" placeholder="Claimant Name" required>
-                        <button type="submit">Mark as Claimed</button>
-                    </form>
-                    {% endif %}
-                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
             </tr>
-            {% endfor %}
+           
         </tbody>
     </table>
+    <p><a href="sgdashboard.html">Back to Dashboard</a></p>
     <p><a href="record.html">Record New Item</a></p>
+
+    <script>
+        // Fetch found items from the server
+        fetch('record.html?action=view_found_items')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector('tbody');
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.item_name}</td>
+                        <td>${item.location_found}</td>
+                        <td>${item.date_found}</td>
+                        <td>${item.description}</td>
+                        <td>${item.status}</td>
+                        <td>${item.claimed_by || 'N/A'}</td>
+                        <td>${item.date_claimed || 'N/A'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching found items:', error));
+    </script>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous"></script>
+</div>
+    
 </body>
 </html>
