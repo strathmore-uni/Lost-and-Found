@@ -23,10 +23,11 @@
         <label for="description">Description:</label>
         <textarea id="description" name="description" rows="4"></textarea>
 
+     
         <label for="contact_info">Student Information:</label>
         <input type="text" id="Student_info" name="Student_info" required placeholder="email">
 
-        <label for="date_found">Date claimed:</label>
+        <label for="date_found">Date claimed:(Optional)</label>
         <input type="datetime-local" id="date_claimed" name="date_claimed" required>
 
         <label for="status">Status:</label>
@@ -52,13 +53,14 @@
             const dateClaimed = document.getElementById('date_claimed').value;
             const status = document.getElementById('status').value;
 
-            if (!itemName || !locationFound || !dateFound || !studentInfo || !dateClaimed || !status) {
+            if (!itemName || !locationFound || !dateFound || !studentInfo || !status) {
                 alert("Please fill in all required fields.");
                 return;
             }
 
             this.submit();
         });
+        
     </script>
 </form>
 </body>
