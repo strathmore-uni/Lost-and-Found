@@ -49,7 +49,7 @@ class FoundItem(models.Model):
     itemDescription = models.TextField()
     itemImage = models.ImageField(upload_to='found_items/')
     foundDate = models.DateField()
-    guardID = models.ForeignKey(Student, on_delete=models.CASCADE)
+    guardID = models.ForeignKey(SecurityGuard, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.itemName
