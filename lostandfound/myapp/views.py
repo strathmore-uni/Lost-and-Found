@@ -38,7 +38,8 @@ def dashboard(request):
 from rest_framework.response import Response
 from rest_framework.decorators import api_view  
 from .serializers import UserSerializer  # Add this import
-
+from .serializers import LostItemSerializer  # Add this import
+from .serializers import FoundItemSerializer  # Add this import
 @api_view(['GET'])
 def api_user_list(request):
     users = User.objects.all()
@@ -75,6 +76,17 @@ def api_found_item_list(request):
     serializer = UserSerializer(found_items, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def lost_items_api(request):
+    items = LostItem.objects.all()
+    serializer = LostItemSerializer(items, many=True)
+    return Response(serializer.data)
 
+@api_view(['GET'])
+def found_items_api(request):
+    items = FoundItem.objects.all()
+    serializer = FoundItemSerializer(items, many=True)
+    return Response(serializer.data)
 
-
+def home(request):
+    return HttpResponse("Hello from Lost & Found!")
