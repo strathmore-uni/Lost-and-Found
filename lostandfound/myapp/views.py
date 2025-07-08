@@ -90,3 +90,9 @@ def found_items_api(request):
 
 def home(request):
     return HttpResponse("Hello from Lost & Found!")
+
+from django.http import HttpResponse
+from django.template import loader
+def navigate_to_home(request):
+    template = loader.get_template('lostandfound.myapp/home.html')
+    return HttpResponse(template.render({}, request))

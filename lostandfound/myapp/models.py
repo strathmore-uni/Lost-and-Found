@@ -51,5 +51,53 @@ class FoundItem(models.Model):
     foundDate = models.DateField()
     guardID = models.ForeignKey(SecurityGuard, on_delete=models.CASCADE)
 
+class StudentAdmin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    studentID = models.IntegerField(unique=True)
+    course = models.CharField(max_length=100)   
+    studentName = models.CharField(max_length=100)
+    studentEmail = models.EmailField(unique=True)
+    studentImage = models.ImageField(upload_to='students/')
+    studentAddress = models.CharField(max_length=255)
+    studentPhone = models.CharField(max_length=15)
+    studentDOB = models.DateField()
+    studentGender = models.CharField(max_length=10)
+    studentYear = models.IntegerField()
+
+class SecurityGuardAdmin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    guardID = models.IntegerField(unique=True)
+    guardName = models.CharField(max_length=100)
+    guardEmail = models.EmailField(unique=True)
+    guardImage = models.ImageField(upload_to='guards/')
+    guardAddress = models.CharField(max_length=255)
+    guardPhone = models.CharField(max_length=15)
+    guardDOB = models.DateField()
+
+class LostItemAdmin(models.Model):
+    itemID = models.AutoField(primary_key=True)
+    itemName = models.CharField(max_length=100)
+    itemDescription = models.TextField()
+    itemImage = models.ImageField(upload_to='lost_items/')
+    lostDate = models.DateField()
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    lostLocation = models.CharField(max_length=255)
+
+class FoundItemAdmin(models.Model):
+    itemID = models.AutoField(primary_key=True)
+    itemName = models.CharField(max_length=100)
+    itemDescription = models.TextField()
+    itemImage = models.ImageField(upload_to='found_items/')
+    foundDate = models.DateField()
+    guard = models.ForeignKey(SecurityGuard, on_delete=models.CASCADE)
+    foundLocation = models.CharField(max_length=255)
+    foundBy = models.ForeignKey(SecurityGuard, on_delete=models.CASCADE, related_name='found_items')
+    foundDate = models.DateField()
+
+class AdminProfileAdmin(models.Model):
     def __str__(self):
         return self.itemName
+    
+class UserAdmin(models.Model):
+    def __str__(self):
+        return self.email
