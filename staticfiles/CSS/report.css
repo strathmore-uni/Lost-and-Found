@@ -1,0 +1,30 @@
+/* Placeholder for report.css */
+
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #f0e6ff;
+  color: #222;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+p, li, td, th {
+  line-height: 2.0;
+}
+
+.container, .report-section {
+  background: #fff8f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(80, 0, 120, 0.08);
+  padding: 24px;
+  margin: 24px auto;
+}
+
+button, input, select, textarea {
+  font-family: 'Montserrat', Arial, sans-serif;
+}

@@ -1,38 +1,153 @@
 from django.shortcuts import render
 from .models import User, Student, SecurityGuard, AdminProfile, LostItem, FoundItem
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
-def user_list(request):
-    users = User.objects.all()
-    return render(request, 'myapp/user_list.html', {'users': users})
+def index(request):
+    return render(request, 'index.html')
 
-def student_list(request):
-    students = Student.objects.all()
-    return render(request, 'myapp/student_list.html', {'students': students})
+def register(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = User(email=email, password=password)
+        user.save()
+        return HttpResponse("User registered successfully.")
+    return render(request, 'register.html')
 
-def security_guard_list(request):
-    guards = SecurityGuard.objects.all()
-    return render(request, 'myapp/security_guard_list.html', {'guards': guards})
+def search(request):
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        results = LostItem.objects.filter(itemName__icontains=query)
+        return render(request, 'search_results.html', {'results': results})
+    return render(request, 'search.html')
 
-def admin_profile_list(request):        
-    admin_profiles = AdminProfile.objects.all()
-    return render(request, 'myapp/admin_profile_list.html', {'admin_profiles': admin_profiles})
+def record(request):
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        item_description = request.POST.get('item_description')
+        item_image = request.FILES.get('item_image')
+        lost_date = request.POST.get('lost_date')
+        student_id = request.POST.get('student_id')
+        
+        student = Student.objects.get(studentID=student_id)
+        lost_item = LostItem(itemName=item_name, itemDescription=item_description, itemImage=item_image, lostDate=lost_date, student=student)
+        lost_item.save()
+        
+        return HttpResponse("Lost item recorded successfully.")
+    return render(request, 'record.html')
 
-def lost_item_list(request):
-    lost_items = LostItem.objects.all()
-    return render(request, 'myapp/lost_item_list.html', {'lost_items': lost_items})
+def report(request):
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        item_description = request.POST.get('item_description')
+        item_image = request.FILES.get('item_image')
+        found_date = request.POST.get('found_date')
+        guard_id = request.POST.get('guard_id')
+        
+        guard = SecurityGuard.objects.get(guardID=guard_id)
+        found_item = FoundItem(itemName=item_name, itemDescription=item_description, itemImage=item_image, foundDate=found_date, guardID=guard)
+        found_item.save()
+        
+        return HttpResponse("Found item reported successfully.")
+    return render(request, 'report.html')
 
-def found_item_list(request):
-    found_items = FoundItem.objects.all()
-    return render(request, 'myapp/found_item_list.html', {'found_items': found_items})
+def security_guard(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        guard = SecurityGuard(email=email, password=password)
+        guard.save()
+        return HttpResponse("Security guard registered successfully.")
+    return render(request, 'security_guard.html')
+
+def student(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        student = Student(email=email, password=password)
+        student.save()
+        return HttpResponse("Student registered successfully.")
+    return render(request, 'student.html')  
+
+def upload(request):    
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        item_description = request.POST.get('item_description')
+        item_image = request.FILES.get('item_image')
+        lost_date = request.POST.get('lost_date')
+        student_id = request.POST.get('student_id')
+        
+        student = Student.objects.get(studentID=student_id)
+        lost_item = LostItem(itemName=item_name, itemDescription=item_description, itemImage=item_image, lostDate=lost_date, student=student)
+        lost_item.save()
+        
+        return HttpResponse("Lost item uploaded successfully.")
+    return render(request, 'upload.html')
+
+def verify(request):
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        item_description = request.POST.get('item_description')
+        item_image = request.FILES.get('item_image')
+        found_date = request.POST.get('found_date')
+        guard_id = request.POST.get('guard_id')
+        
+        guard = SecurityGuard.objects.get(guardID=guard_id)
+        found_item = FoundItem(itemName=item_name, itemDescription=item_description, itemImage=item_image, foundDate=found_date, guardID=guard)
+        found_item.save()
+        
+        return HttpResponse("Found item verified successfully.")
+    return render(request, 'verify.html')
+
+def view_page(request):
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        item_description = request.POST.get('item_description')
+        item_image = request.FILES.get('item_image')
+        lost_date = request.POST.get('lost_date')
+        student_id = request.POST.get('student_id')
+        
+        student = Student.objects.get(studentID=student_id)
+        lost_item = LostItem(itemName=item_name, itemDescription=item_description, itemImage=item_image, lostDate=lost_date, student=student)
+        lost_item.save()
+        
+        return HttpResponse("Lost item viewed successfully.")
+    return render(request, 'view.html')
+
+def sgdashboard(request):
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        item_description = request.POST.get('item_description')
+        item_image = request.FILES.get('item_image')
+        found_date = request.POST.get('found_date')
+        guard_id = request.POST.get('guard_id')
+        
+        guard = SecurityGuard.objects.get(guardID=guard_id)
+        found_item = FoundItem(itemName=item_name, itemDescription=item_description, itemImage=item_image, foundDate=found_date, guardID=guard)
+        found_item.save()
+        
+        return HttpResponse("Found item viewed successfully.")
+    return render(request, 'sgdashboard.html')
+
+
 
 @login_required
-def dashboard(request):
+def register(request):
     if request.user.is_authenticated:
-        return render(request, 'myapp/dashboard.html', {'user': request.user})
+        return render(request, 'register.html', {'user': request.user})
     else:
         return HttpResponse("You are not logged in.")
+
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'index.html')
+
+def register(request):
+    return render(request, 'register.html')
+
+    
 
 
 from rest_framework.response import Response
@@ -89,10 +204,45 @@ def found_items_api(request):
     return Response(serializer.data)
 
 def home(request):
-    return HttpResponse("Hello from Lost & Found!")
+    return render(request, 'index.html')
 
 from django.http import HttpResponse
 from django.template import loader
 def navigate_to_home(request):
     template = loader.get_template('lostandfound.myapp/home.html')
     return HttpResponse(template.render({}, request))
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+def record(request):
+    return render(request, 'record.html')
+def report(request):
+    return render(request, 'report.html')
+def search(request):
+    return render(request, 'search.html')
+def security_guard(request):
+    return render(request, 'Security Guard.html')
+def security_guard_login(request):
+    return render(request, 'Securityguardlogin.html')
+def sg_dashboard(request):
+    return render(request, 'sgdashboard.html')
+def student(request):
+    return render(request, 'student.html')
+def upload(request):
+    return render(request, 'upload.html')
+def verify(request):
+    return render(request, 'verify.html')
+def view_page(request):
+    return render(request, 'view.html')
+
+def api_securityguards(request):
+    guards = SecurityGuard.objects.all()
+    data = [
+        {
+            'guardID': guard.guardID,
+            'guardemail': guard.guardemail,
+            'guardname': guard.guardname
+        }
+        for guard in guards
+    ]
+    return JsonResponse(data, safe=False)

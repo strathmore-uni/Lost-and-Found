@@ -1,4 +1,5 @@
-    :root {
+/* Moved from staticfiles/admin/CSS/Security Guard.css */
+ :root {
             --strath-blue: #003366;
             --strath-gold: #FFD700;
             --light-gray: #f5f5f5;
@@ -32,7 +33,7 @@
             font-size: 1.8rem;
         }
         
-        .registration-form {
+        .registration-container {
             background-color: white;
             padding: 30px;
             border-radius: 0 0 8px 8px;

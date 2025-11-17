@@ -1,0 +1,16 @@
+/* Moved from staticfiles/admin/CSS/about.css */
+
+body {
+  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  line-height: 1.6;
+}

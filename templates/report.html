@@ -1,13 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="search.html">Search</a></li>
+    <li><a href="report.html">Report</a></li>
+    <li><a href="register.html">Register</a></li>
+    <li><a href="student.html">Student</a></li>
+    <li><a href="Security Guard.html">Security Guard</a></li>
+  </ul>
+</nav>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strathmore University - Report Lost Item</title>
-    <link rel="stylesheet" href="CSS/report.css">
+    <title>Strathmore Lost & Found System</title>
+    <link rel="stylesheet" href="{% static 'CSS/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/report.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/h1.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/div.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/header.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    
-    
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
 </head>
 <body>
     <div class="container">
@@ -19,12 +34,12 @@
         <div class="report-form">
             <form id="lostItemForm">
                 <div class="form-group">
-                    <label for="item_name">Item Name*</label>
+                    <label for="item_name">Item Name:</label>
                     <input type="text" id="item_name" name="item_name" required>
                 </div>
-                
+                <en></en>
                 <div class="form-group">
-                    <label for="category">Category*</label>
+                    <label for="category">Category:</label>
                     <select id="category" name="category" required>
                         <option value="">Select category</option>
                         <option value="electronics">Electronics</option>
@@ -34,10 +49,10 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
-                
+                <en></en>
                 <div class="form-group">
                     <label for="description">Description*</label>
-                    <textarea id="description" name="description" required></textarea>
+                    <en></en><textarea id="description" name="description" required></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -77,7 +92,7 @@
             
          
 
-    <script src="report.js"></script>
+    <script src="{% static 'JS/report.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous"></script>
    
 </body>

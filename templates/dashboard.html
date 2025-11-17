@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="search.html">Search</a></li>   
+    <li><a href="report.html">Report</a></li>
+    <li><a href="register.html">Register</a></li>
+    <li><a href="student.html">Student</a></li>
+    <li><a href="Security Guard.html">Security Guard</a></li>
+  </ul>
+</nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strathmore Lost & Found System</title>
+    <link rel="stylesheet" href="{% static 'CSS/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/h1.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/div.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/header.css' %}">
+    <!-- Add other CSS files as needed -->
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    header{
+        background-color: #4a90e2;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: larger;
+    }
+    button {
+        background-color: #4a90e2;
+        color: rgb(148, 194, 239);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        font: news-rev;
+    }
+    div{
+        margin: auto;
+        background-color: rgb(152, 192, 244);
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 18px;
+    }
+    </style>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="logo">Lost & Found System</div>
+            <div class="user-info">
+                <span>Welcome, Student</span>
+                
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="welcome-message">
+                <h1>Welcome to Your Dashboard</h1>
+                <p>What would you like to do today?</p>
+            </div>
+
+             <!--button-->
+    <div class="button">
+        <a href="search.html" class="action-btn">Search for Lost Item</a>
+        <a href="report.html" class="action-btn">Report a Lost Item</a>
+    </div>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+    <br><br>
+                    
+        <footer>
+            <p>&copy; 2023 Lost & Found System. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Simulate logout action
+            alert('You have been logged out.');
+            window.location.href = 'index.php'; // Redirect to login page
+        });
+    </script>
+    
+</div>
+</body>
+</html>

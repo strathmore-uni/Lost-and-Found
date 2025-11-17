@@ -1,0 +1,17 @@
+/* Moved from staticfiles/admin/CSS/changelists.css */
+
+.table-changelist {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table-changelist th, .table-changelist td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-changelist th {
+  background: #eee;
+}

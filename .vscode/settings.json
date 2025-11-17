@@ -1,9 +1,12 @@
 {
     "cSpell.words": [
+        "corsheaders",
         "guardemail",
         "guardname",
         "isgood",
         "lostandfound",
+        "runserver",
+        "sgdashboard",
         "studentemail"
     ],
     "git.ignoreLimitWarning": true

@@ -1,0 +1,17 @@
+/* Moved from staticfiles/admin/CSS/autocomplete.css */
+
+.autocomplete-items {
+  border: 1px solid #ddd;
+  background: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.autocomplete-items div:hover {
+  background: #e9e9e9;
+}
